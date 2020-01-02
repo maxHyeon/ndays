@@ -18,13 +18,19 @@ public class HelloController {
         return "Hello world";
     }
 
-    @GetMapping(value = "/helloworld/json")
+//    @GetMapping(value = "/helloworld(.json)" )
+    @GetMapping(value = "/helloworld/json" )
     @ResponseBody
     public Hello helloworldJson(){
         Hello hello = Hello.builder().message("Helloworld").build();
         return hello;
     }
-
+//    @GetMapping(value = "/helloworld/account" )
+//    @ResponseBody
+//    public Hello helloworldJson(){
+//        Hello hello = Hello.builder().message("Helloworld").build();
+//        return hello;
+//    }
     @Data
     @Builder
     public static class Hello {

@@ -28,13 +28,13 @@ public class PostgreSQLRunner implements ApplicationRunner {
             System.out.println(User);
 
             Statement statement = connection.createStatement();
-            String sql = "CREATE TABLE ACCOUNT(" +
-                    "ID INTEGER NOT NULL," +
-                    "NAME VARCHAR(255)," +
-                    "PRIMARY KEY(ID))";
-            statement.executeUpdate(sql);
+//            String sql = "CREATE TABLE ACCOUNT(" +
+//                    "ID INTEGER NOT NULL," +
+//                    "NAME VARCHAR(255)," +
+//                    "PRIMARY KEY(ID))";
+//            statement.executeUpdate(sql);
         }
 
-        jdbcTemplate.execute("INSERT INTO ACCOUNT VALUES(1, 'saelobi')");
+//        jdbcTemplate.execute("INSERT INTO ACCOUNT VALUES(1, 'saelobi')");
     }
 }
