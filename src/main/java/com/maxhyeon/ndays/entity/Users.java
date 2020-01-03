@@ -1,19 +1,16 @@
 package com.maxhyeon.ndays.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Builder
 @Entity
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
-public class User {
+@Table(name="users")
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long msrl;
