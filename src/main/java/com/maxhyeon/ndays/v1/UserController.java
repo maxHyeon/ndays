@@ -1,8 +1,10 @@
 package com.maxhyeon.ndays.v1;
 
 import com.maxhyeon.ndays.entity.Users;
+import com.maxhyeon.ndays.model.response.ListResult;
 import com.maxhyeon.ndays.repo.UserJpaRepo;
 
+import com.maxhyeon.ndays.service.ResponseService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,11 +23,12 @@ import java.util.List;
 public class UserController {
 
     private final UserJpaRepo userJpaRepo;
-
-    @Operation(summary  = "회원 조회", description = "모든 회원을 조회한다",tags={"user"})
+    private final ResponseService responseService; // 결과를 처리할 Service
+    @Operation(summary  = "회원 리스트 조회", description = "모든 회원을 조회한다",tags={"user"})
     @GetMapping(value = "/users")
-    public List<Users> findAllUser() {
-        return userJpaRepo.findAll();
+    public ListResult<Users> findAllUser() {
+        // 결과데이터가 여러건인경우 getListResult를 이용해서 결과를 출력한다.
+        return responseService.getListResult(userJpaRepo.findAll());
     }
 
     @Operation(summary  = "회원 입력", description = "회원을 입력한다.")
@@ -38,4 +41,24 @@ public class UserController {
                 .build();
         return userJpaRepo.save(user);
     }
+//    @Operation(summary  = "회원 입력", description = "회원을 입력한다.")
+//    @PostMapping(value = "/user")
+//    public Users save(@Parameter(description = "회원아이디", required = true) @RequestParam(value="page", defaultValue="1") String uid,
+//                      @Parameter(description = "회원이름", required = true) @RequestParam String name) {
+//        Users user = Users.builder()
+//                .uid(uid)
+//                .name(name)
+//                .build();
+//        return userJpaRepo.save(user);
+//    }
+//    @Operation(summary  = "회원 입력", description = "회원을 입력한다.")
+//    @PostMapping(value = "/user")
+//    public Users save(@Parameter(description = "회원아이디", required = true) @RequestParam(value="page", defaultValue="1") String uid,
+//                      @Parameter(description = "회원이름", required = true) @RequestParam String name) {
+//        Users user = Users.builder()
+//                .uid(uid)
+//                .name(name)
+//                .build();
+//        return userJpaRepo.save(user);
+//    }
 }
