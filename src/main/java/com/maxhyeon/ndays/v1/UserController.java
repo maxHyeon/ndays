@@ -34,10 +34,10 @@ public class UserController {
         return responseService.getListResult(userJpaRepo.findAll());
     }
     @Operation(summary  = "회원 조회", description = "userID회원조회",tags={"user"})
-    @GetMapping(value = "/user/{msrl}")
-    public SingleResult<Users> findUserById(@Parameter(description = "회원ID", required = true) @PathVariable long msrl) {
+    @GetMapping(value = "/user/{userId}")
+    public SingleResult<Users> findUserById(@Parameter(description = "회원ID", required = true) @PathVariable long userId) throws Exception {
         // 결과데이터가 단일건인경우 getBasicResult를 이용해서 결과를 출력한다.
-        return responseService.getSingleResult(userJpaRepo.findById(msrl).orElse(null));
+        return responseService.getSingleResult(userJpaRepo.findById(userId).orElseThrow(Exception::new));
     }
 
     @Operation(summary  = "회원 입력", description = "회원을 입력한다.")
